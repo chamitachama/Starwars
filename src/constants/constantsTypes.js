@@ -1,0 +1,6 @@
+
+export const SET_PEOPLE = "SET_PEOPLE";
+export const FETCH_PEOPLE_ERROR = "FETCH_PEOPLE_ERROR";
+
+export const SET_PLANETS = "SET_PLANETS";
+export const FETCH_PLANETS_ERROR = "FETCH_PLANETS_ERROR";
