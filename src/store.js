@@ -1,19 +1,10 @@
+import { SET_PEOPLE } from "./constants/constantsTypes"
+
 export const initialStore = () => {
   return {
-    message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ],
-    favorites: [] 
+    people: [],
+    planets: [],
+    favorites: []
   }
 }
 
@@ -28,6 +19,10 @@ export default function storeReducer(store, action = {}) {
           todo.id === id ? { ...todo, background: color } : todo
         )
       };
+    }
+
+    case SET_PEOPLE: {
+      return { ...store, people: action.payload };
     }
 
     case 'ADD_FAVORITE': {
