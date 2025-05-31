@@ -1,0 +1,151 @@
+.sw-navbar {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #333;
+}
+
+.logo img {
+  height: auto;
+  display: block;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 40px;
+  opacity: 0;
+}
+
+.search-container.open .search-input {
+  width: 180px;
+  padding: 5px 10px 5px 15px;
+  border-bottom: 1px solid #ffe81f;
+  opacity: 1;
+}
+
+.search-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-toggle,
+.search-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+.search-close {
+  transform: scale(0.9);
+}
+.search-close:hover {
+  transform: scale(1);
+}
+
+.favorites-container {
+  position: relative;
+}
+
+.favorites-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  transition: color 0.2s ease;
+}
+
+.favorites-toggle:hover,
+.favorites-toggle.active {
+  color: #ffe81f;
+}
+
+.favorites-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #000;
+  border: 1px solid #333;
+  min-width: 200px;
+  z-index: 100;
+  padding: 10px 0;
+}
+
+.favorites-dropdown-item {
+  padding: 8px 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.favorites-dropdown-item:hover {
+  background-color: #111;
+  color: #ffe81f;
+}
+
+.fa-icon {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.search-toggle:hover .fa-icon,
+.search-close:hover .fa-icon,
+.favorites-toggle:hover .fa-icon,
+.favorites-toggle.active .fa-icon {
+  color: #ffe81f;
+}
+
+.dropdown-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.favorites-toggle.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
