@@ -39,19 +39,21 @@ export const Home = () => {
   //   paddingBot
 
   return (
-    <div className="mt-5 px-4">
+    <div className="mt-5 px-4 ">
       {/* Characters Section */}
       <h4 className="text-danger fs-2 mb-4">Characters</h4>
-      <div>
-        {store.people.map((person) =>
-        <Card  
-              key={person.id}
+      <div className="d-flex flex-wrap gap-3 " style={{ overflowX: 'auto', paddingBottom: '10px' }}>
+        {store.people.map((person) =>(
+          <div key={person.id} style={{ flex: '0 0 auto', scrollSnapAlign: 'start', width: '18rem' }}>
+            <Card
               id={person.id}
               img={person.url}
               name={person.name}
               gender={person.gender}
-              hairColor={person.hairColor} />
-          )}
+              hairColor={person.hairColor}
+            />
+          </div>
+        ))}    
       </div>
 
       {/* Planets Section */}

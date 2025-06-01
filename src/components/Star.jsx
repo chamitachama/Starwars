@@ -5,7 +5,7 @@ export const Star = ({name, type}) => {
     const starred = store.favorites.some(item => item.name === name);
 
     return (
-        <button onClick={() => toggleStar(name, type, starred, dispatch)}>{ starred ? "FAV" : "NO FAV" } ☆ </button>
+        <button onClick={() => toggleStar(name, type, starred, dispatch)} style={{border: 'none', background: 'none', padding: 0, cursor: 'pointer', }}>{ starred ? ( <><i class="fa-solid fa-heart"></i></>) : (<><i class="fa-regular fa-heart"></i></>) }  </button>
     )
 }
 

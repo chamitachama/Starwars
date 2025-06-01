@@ -9,7 +9,7 @@ export const Card = ({name, gender, hairColor}) => (
             <p className="card-text">Hair Color: {hairColor}</p>
         </div>
         <div className="d-flex justify-content-between align-items-center">
-            <button className="btn btn-primary">Learn More</button>
+            <button className="btn btn-primary" style={{ padding: '2px 6px', fontSize: '0.75rem' }}>Learn More</button>
             <Star name={name} type={"character"} />
         </div>
     </div>
