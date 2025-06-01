@@ -41,6 +41,7 @@ export const Home = () => {
   return (
     <div className="mt-5 px-4 ">
       {/* Characters Section */}
+      {/* fsdfds */}
       <h4 className="text-danger fs-2 mb-4">Characters</h4>
       <div className="d-flex flex-wrap gap-3 " style={{ overflowX: 'auto', paddingBottom: '10px' }}>
         {store.people.map((person) =>(
