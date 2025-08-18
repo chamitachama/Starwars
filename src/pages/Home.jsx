@@ -1,72 +1,61 @@
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { Card } from "../components/Card.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Carousel } from "../components/Carousel.jsx";
 import { fetchPeople } from "../actions/peopleActions.js";
+import { fetchPlanets } from "../actions/planetsActions.js";
 
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    fetchPeople(dispatch);
-  }, []);
+    const loadData = async () => {
+      await fetchPeople(dispatch);
+      await fetchPlanets(dispatch);
+      setIsLoading(false); 
+    };
 
-  // const toggleStar = () => {
-  //   setStarred(!starred);
-  //   dispatch({
-  //     type: starred ? "REMOVE_FAVORITE" : "ADD_FAVORITE",
-  //     payload: { name: "Luke Skywalker", type: "character" },
-  //   });
-  // };
+    loadData();
+  }, [dispatch]);
 
-  // const togglePlanetStar = () => {
-  //   setPlanetStarred(!planetStarred);
-  //   dispatch({
-  //     type: planetStarred ? "REMOVE_FAVORITE" : "ADD_FAVORITE",
-  //     payload: { name: "Alderaan", type: "planet" },
-  //   });
-  // };
-
-  // const cardStyle = {
-  //   width: "400px",
-  //   minHeight: "300px",
-  //   display: "inline-block",
-  //   marginRight: "1rem",
-  // };
-
-  // const scrollContainerStyle = {
-  //   overflowX: "auto",
-  //   whiteSpace: "nowrap",
-  //   paddingBot
-
+  if (isLoading) {
+    return <p className="text-white">Loading info from API...</p>;
+  }
   return (
     <div className="mt-5 px-4 ">
       {/* Characters Section */}
-      {/* fsdfds */}
-      <h4 className="text-danger fs-2 mb-4">Characters</h4>
-      <div className="d-flex flex-wrap gap-3 " style={{ overflowX: 'auto', paddingBottom: '10px' }}>
-        {store.people.map((person) =>(
-          <div key={person.id} style={{ flex: '0 0 auto', scrollSnapAlign: 'start', width: '18rem' }}>
-            <Card
-              id={person.id}
-              img={person.url}
-              name={person.name}
-              gender={person.gender}
-              hairColor={person.hairColor}
-            />
-          </div>
-        ))}    
-      </div>
+      <h4 className="text-warning fs-2 mb-4">Characters</h4>
+      <Carousel
+        items={store.people} 
+        renderItem={(character) => ({
+          id: character.uid,
+          type: "character",
+          // img: character.image,
+          name: character.name,
+          gender: character.gender,
+          hairColor: character.hairColor,
+          skinColor: character.skinColor,
+          eyeColor: character.eyeColor,
+        })}/>
+     
+        
 
       {/* Planets Section */}
-      <h4 className="text-danger fs-2 mt-5 mb-4">Planets</h4>
+      <h4 className="text-warning fs-2 mt-5 mb-4">Planets</h4>
       <div>
-      {/* {store.planets.map(planet,index)}
-       < Card 
-          key={id}
-          img={planet.url}
-          population ={planet.population}
-          terrain ={planet.terrain}
-        /> */}
+      <Carousel 
+        items={store.planets} 
+        renderItem={(planet) => ({
+          id: planet.uid,
+          type: "planet",  
+          // img: planet.url,
+          name: planet.name,
+          population: planet.population,
+          terrain: planet.terrain,
+          climate: planet.climate,
+          gravity: planet.gravity,
+        })}
+      />
       </div>
     </div>
   );

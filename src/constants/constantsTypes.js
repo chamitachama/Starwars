@@ -4,3 +4,7 @@ export const FETCH_PEOPLE_ERROR = "FETCH_PEOPLE_ERROR";
 
 export const SET_PLANETS = "SET_PLANETS";
 export const FETCH_PLANETS_ERROR = "FETCH_PLANETS_ERROR";
+
+
+export const SET_IMAGE = "SET_IMAGE";
+export const FETCH_IMAGE_ERROR = "FETCH_IMAGE_ERROR";
