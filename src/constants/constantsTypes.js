@@ -8,3 +8,6 @@ export const FETCH_PLANETS_ERROR = "FETCH_PLANETS_ERROR";
 
 export const SET_IMAGE = "SET_IMAGE";
 export const FETCH_IMAGE_ERROR = "FETCH_IMAGE_ERROR";
+
+export const SET_SINGLE = "SET_SINGLE";
+

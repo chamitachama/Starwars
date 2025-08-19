@@ -1,4 +1,4 @@
-import { SET_PEOPLE, SET_PLANETS } from "./constants/constantsTypes"
+import { SET_PEOPLE, SET_PLANETS, SET_SINGLE } from "./constants/constantsTypes"
 
 export const initialStore = () => {
   return {
@@ -6,35 +6,36 @@ export const initialStore = () => {
     planets: [],
     favorites: [],
     vehicles:[],
+    single: null,
 
-    character: {
-      uid: null,
-      name: '',
-      url: '',
-      image: '',
-      description: '',
-      gender: '',
-    },
+    // character: {
+    //   uid: null,
+    //   name: '',
+    //   url: '',
+    //   image: '',
+    //   description: '',
+    //   gender: '',
+    // },
 
-    planet: {
-      uid: null,
-      name: '',
-      url: '',
-      image: '',
-      description: '',
-      climate: '',
-      terrain: '',
-      population: '',
-    },
+    // planet: {
+    //   uid: null,
+    //   name: '',
+    //   url: '',
+    //   image: '',
+    //   description: '',
+    //   climate: '',
+    //   terrain: '',
+    //   population: '',
+    // },
 
-    vehicle: {
-      uid: null,
-      name: '',
-      url: '',
-      image: '',
-      description: '',
-      model: '',
-    },
+    // vehicle: {
+    //   uid: null,
+    //   name: '',
+    //   url: '',
+    //   image: '',
+    //   description: '',
+    //   model: '',
+    // },
   }
 }
 
@@ -65,17 +66,12 @@ export default function storeReducer(store, action = {}) {
       };
     }
     
-    case "SET_CHARACTER_DETAIL":
+    case SET_SINGLE:
       return {
-        ...store, characterDetail: action.payload
-  
+        ...store,
+        single: action.payload,
       };
-
-    case "SET_PLANET_DETAIL":
-      return {
-       ...store, 
-        planetDetail: action.payload 
-      };
+    
 
       
 

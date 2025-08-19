@@ -18,7 +18,7 @@ export const Navbar = () => {
 					width="120"
 					/>
 				</Link>
-				<div className="ml-auto">
+				<div className="btn-group ml-auto">
 
 					<button
 						className="btn btn-warning dropdown-toggle"
@@ -30,7 +30,7 @@ export const Navbar = () => {
 					> 
 						Favorites —— {store.favorites.length}
 					</button>
-					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="favoritesDropdown" data-bs-auto-close="outside" >
+					<ul className="dropdown-menu dropdown-menu-right" aria-labelledby="favoritesDropdown"  data-bs-auto-close="outside" >
            				 {store.favorites.length === 0 ? (
              				 <li className="dropdown-item text-muted">No favorites yet</li>
            					 ) :  store.favorites.map(( favorite, index) => (
@@ -38,26 +38,11 @@ export const Navbar = () => {
 							<button
 							className="btn btn-sm btn-danger ms-2"
 							onClick={() => dispatch({ type: "REMOVE_FAVORITE", payload: favorite })}	 >
-							[ ✕ ]
+							[✕]
 						  </button>
 						</li>))}
-						<li>
-							<hr className="dropdown-divider" />
-						</li>
-						<li>
-						<Link to="/favorites" className="dropdown-item text-center">
-							See All
-						</Link>
-						</li>
 					</ul>
-
-
-
-					{/* <Link to="/single/:theId">Single</Link> */}
-
-					
 				</div>
-
 			</div>
 		</nav>
 	);

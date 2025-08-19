@@ -1,14 +1,16 @@
+import useGlobalReducer from "../hooks/useGlobalReducer";
 import { Card } from "./Card";
 
 
-export const Carousel = ({ items, renderItem, type }) => {
-  if (!Array.isArray(items)) return null; // Evita el error de items.map
+export const Carousel = ({ dataType }) => {
+  const { store } = useGlobalReducer();
+
+  const items = dataType === "people" ? store.people : store.planets;
 
   return (
-    <div className="row gap-2 d-flex overflow-hidden">
+    <div className="row gap-4 d-flex overflow-hidden">
       {items.map((item) => {
-        const props = renderItem(item); 
-        return <Card key={props.id} {...props} type={type} />;
+        return <Card key={item.id} data={item} type={dataType} />;
       })}
     </div>
   );
