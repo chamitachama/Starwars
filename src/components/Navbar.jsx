@@ -1,120 +1,52 @@
-import React, { useState, useRef, useEffect } from 'react';
-import '../Navbar.css';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faTimes, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 
-const Navbar = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const searchRef = useRef(null);
-  const favoritesRef = useRef(null);
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import { createContext } from "react";
 
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-    setIsFavoritesOpen(false);
-    if (!isSearchOpen) {
-      setSearchQuery('');
-    }
-  };
+export const Navbar = () => {
+	const { store, dispatch } = useGlobalReducer();
 
-  const toggleFavorites = () => {
-    setIsFavoritesOpen(!isFavoritesOpen);
-    setIsSearchOpen(false);
-  };
+	return (
+		<nav className="navbar navbar-light bg-dark">
+			<div className="container">
+				<Link to="/">
+					<img
+					src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png"
+					alt="STAR WARS"
+					width="120"
+					/>
+				</Link>
+				<div className="btn-group ml-auto">
 
-  const search = (e) => {
-    e.preventDefault();
-    console.log('Searching for:', searchQuery);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target) &&
-        favoritesRef.current &&
-        !favoritesRef.current.contains(event.target)
-      ) {
-        setIsSearchOpen(false);
-        setIsFavoritesOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  return (
-    <header className="sw-navbar">
-      <div className="navbar-container">
-        <div className="navbar-top">
-          <a href="/" className="logo">
-            <img
-              src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png"
-              alt="STAR WARS"
-              width="120"
-            />
-          </a>
-
-          <div className="navbar-right">
-            <div className={`search-container ${isSearchOpen ? 'open' : ''}`} ref={searchRef}>
-              <form onSubmit={search}>
-                <input
-                  id="search-input"
-                  type="text"
-                  placeholder="Search Star Wars"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="search-input"
-                />
-                <div className="search-icons">
-                  {isSearchOpen && (
-                    <button
-                      type="button"
-                      className="search-close"
-                      onClick={toggleSearch}
-                      aria-label="Close search"
-                    >
-                      <FontAwesomeIcon icon={faTimes} className="fa-icon" />
-                    </button>
-                  )}
-                  <button
-                    type={isSearchOpen ? 'submit' : 'button'}
-                    className={`search-toggle ${isSearchOpen ? 'open' : ''}`}
-                    onClick={!isSearchOpen ? toggleSearch : undefined}
-                    aria-label={isSearchOpen ? 'Search' : 'Open search'}
-                  >
-                    <FontAwesomeIcon icon={faSearch} className="fa-icon" />
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <div className="favorites-container" ref={favoritesRef}>
-              <button
-                className={`favorites-toggle ${isFavoritesOpen ? 'active' : ''}`}
-                onClick={toggleFavorites}
-              >
-                Favorites
-                <FontAwesomeIcon icon={faChevronDown} className="fa-icon dropdown-arrow" />
-              </button>
-              {isFavoritesOpen && (
-                <div className="favorites-dropdown">
-                  <div className="favorites-dropdown-item">Favorite Item 1</div>
-                  <div className="favorites-dropdown-item">Favorite Item 2</div>
-                  <div className="favorites-dropdown-item">Favorite Item 3</div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
+					<button
+						className="btn btn-warning dropdown-toggle"
+						type="button"
+						id="favoritesDropdown"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+						data-bs-auto-close="false"
+					> 
+						Favorites —— {store.favorites.length}
+					</button>
+					<ul className="dropdown-menu dropdown-menu-right" aria-labelledby="favoritesDropdown"  data-bs-auto-close="outside" >
+           				 {store.favorites.length === 0 ? (
+             				 <li className="dropdown-item text-muted">No favorites yet</li>
+           					 ) :  store.favorites.map(( favorite, index) => (
+							<li key={index} className="d-flex justify-content-between align-items-center mb-2 px-3"> {favorite.name}
+							<button
+							className="btn btn-sm btn-danger ms-2"
+							onClick={() => dispatch({ type: "REMOVE_FAVORITE", payload: favorite })}	 >
+							[✕]
+						  </button>
+						</li>))}
+					</ul>
+				</div>
+			</div>
+		</nav>
+	);
 };
 
-export { Navbar };
+
+
